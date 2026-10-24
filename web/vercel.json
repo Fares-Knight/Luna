@@ -1,0 +1,8 @@
+{
+  "headers": [
+    {"source": "/", "headers": [{"key": "Cache-Control", "value": "no-cache"}]},
+    {"source": "/index.html", "headers": [{"key": "Cache-Control", "value": "no-cache"}]},
+    {"source": "/luna-web.tar.gz", "headers": [{"key": "Cache-Control", "value": "no-cache"}]},
+    {"source": "/luna-web.apk", "headers": [{"key": "Cache-Control", "value": "no-cache"}]}
+  ]
+}

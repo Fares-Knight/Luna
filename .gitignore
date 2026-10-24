@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+# Rapports bruts, outils d'audit et sauvegardes de travail : build/publication/
+
+# Tests et outils
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Configuration locale
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+
+# Android : outils, sorties et configuration propres au poste
+android/.gradle/
+android/local.properties
+android/**/build/
+*.jks
+*.keystore
+*.pem
+*.key
+
+# Déploiement web local
+.vercel/

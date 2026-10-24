@@ -1,0 +1,70 @@
+name: Python
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-package:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    env:
+      SDL_VIDEODRIVER: dummy
+      SDL_AUDIODRIVER: dummy
+      PYGAME_HIDE_SUPPORT_PROMPT: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.13'
+      - name: Installer le projet et les outils
+        run: python -m pip install -e ".[dev]"
+      - name: Tests
+        run: python -m pytest -q
+      - name: Erreurs Python
+        run: python -m ruff check --select E9,F63,F7,F82 src tests tools web android/app/src/main/python
+      - name: Construire le wheel
+        run: python -m build --wheel
+      - name: Installer le wheel sans la copie editable
+        shell: python
+        run: |
+          import pathlib
+          import subprocess
+          import sys
+          wheel = next(pathlib.Path('dist').glob('luna-*.whl'))
+          subprocess.run([sys.executable, '-m', 'pip', 'uninstall', '-y', 'luna'], check=True)
+          subprocess.run([sys.executable, '-m', 'pip', 'install', '--no-deps', str(wheel)], check=True)
+      - name: Charger le paquet installe hors du depot
+        shell: python
+        run: |
+          import os
+          import subprocess
+          import sys
+          import tempfile
+          code = '''
+          from pathlib import Path
+          import luna
+          from luna.ui.app import GameApp
+          assert 'site-packages' in Path(luna.__file__).parts, luna.__file__
+          app = GameApp(size=(900, 600))
+          try:
+              assert app.resources.has_background
+              assert len(app.controller.state.flowers) == 48
+              app.update(0.016)
+              app.draw()
+          finally:
+              app.close()
+          '''
+          with tempfile.TemporaryDirectory() as outside:
+              subprocess.run([sys.executable, '-I', '-c', code], cwd=outside, check=True)

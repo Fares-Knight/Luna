@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.application'
+    id 'com.chaquo.python'
+}
+
+android {
+    namespace 'fr.luna.coupefleur'
+    compileSdk 36
+    buildToolsVersion '36.0.0'
+    defaultConfig {
+        applicationId 'fr.luna.coupefleur'
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName '0.1.0'
+        ndk { abiFilters 'arm64-v8a', 'x86_64' }
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets.main.assets.srcDir '../../src/luna/assets'
+    lint { abortOnError true; checkReleaseBuilds false }
+}
+
+def engineDir = layout.buildDirectory.dir('generated/lunaPython')
+tasks.register('syncLunaEngine', Sync) {
+    from('../../src') {
+        include 'luna/__init__.py', 'luna/domain/**/*.py', 'luna/application/**/*.py'
+        exclude '**/__pycache__/**'
+    }
+    into(engineDir)
+}
+chaquopy {
+    defaultConfig {
+        version = '3.13'
+        def localPython = providers.gradleProperty('buildPython').orNull
+        if (localPython != null) buildPython(localPython)
+    }
+    sourceSets { main { srcDir(engineDir) } }
+}
+tasks.configureEach {
+    if (name.contains('Python') && name != 'syncLunaEngine') dependsOn('syncLunaEngine')
+}
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20240303'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test:rules:1.6.1'
+}
