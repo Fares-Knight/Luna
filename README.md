@@ -2,8 +2,13 @@
 
 Un jeu de stratégie pour **deux personnes sur le même appareil** : choisir deux
 fleurs de même couleur, placer ses ciseaux et préparer la récolte finale.
-Luna adapte le jeu de société **Coupe Fleur** avec un moteur Python commun
-à trois interfaces : PC, navigateur et Android.
+Luna reprend les règles du jeu de société **[Lacuna](https://www.cmyk.games/products/lacuna)**,
+conçu par **Mark Gerrits** et édité par **CMYK**, avec une édition française
+chez **[SAVANA](https://savana-games.eu/products/lacuna-fr)**.
+Cette adaptation numérique indépendante, appelée **Coupe Fleur**, utilise un
+moteur Python commun à trois interfaces : PC, navigateur et Android.
+Les [références et variantes de l'adaptation](docs/game_rules.md) précisent
+les différences connues avec le jeu de société.
 
 Le projet est une **v0.1 jouable**, présentée avec ses sources, ses tests et ses
 limites. Il illustre la séparation entre règles, interactions et rendu, ainsi
@@ -70,7 +75,7 @@ compatibilité avec Python 3.14 ou supérieur ne sont pas revendiquées.
 Une égalité exacte de proximité déclenche un tirage entre les joueurs concernés ;
 une égalité des scores donne une partie nulle. Si aucune coupe n'est possible
 avant la fin de la phase 1, la partie est annulée et recommencée.
-Les [règles originales](RULES.md) et les [décisions v0.1](docs/v0_1_decisions.md)
+Les [règles du projet](RULES.md) et les [décisions v0.1](docs/v0_1_decisions.md)
 expliquent cette adaptation, notamment la priorité de la décision de tirage au sort.
 
 **Clic droit / Échap** annule une sélection ; **N** relance une partie ; **S**

@@ -4,6 +4,16 @@ La [licence MIT de Luna](LICENSE) couvre les contributions du projet, dans la
 mesure des droits détenus. Elle ne remplace pas les licences des composants tiers
 ci-dessous. Conserver leurs mentions lors d'une redistribution.
 
+## Origine du jeu
+
+Luna reprend les règles de **[Lacuna](https://www.cmyk.games/products/lacuna)**,
+jeu conçu par **Mark Gerrits**, édité par **CMYK**, avec une édition française
+chez **[SAVANA](https://savana-games.eu/products/lacuna-fr)**. Coupe Fleur est
+l'adaptation numérique indépendante présentée dans ce dépôt. Les
+[références du livret et variantes connues](docs/game_rules.md) sont documentées.
+La licence MIT concerne les contributions de Luna ; elle ne place pas les
+règles ni le livret de Lacuna sous cette licence.
+
 ## Éléments présents dans ce dépôt
 
 | Élément | Origine et conditions | Mention conservée |

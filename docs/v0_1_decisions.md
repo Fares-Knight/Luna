@@ -1,8 +1,10 @@
 # Décisions validées pour la v0.1
 
-Les règles originales restent dans [RULES.md](../RULES.md). Les décisions
-explicites de l'utilisateur ci-dessous les précisent ou les remplacent pour
-la v0.1 ; ne pas appliquer à leur place la clause originale de nul géométrique.
+Le texte fourni pour **Coupe Fleur** reste intégralement dans
+[RULES.md](../RULES.md). L'[origine Lacuna et les variantes de l'adaptation](game_rules.md)
+sont documentées séparément. Les décisions explicites de l'utilisateur ci-dessous
+précisent ou remplacent les passages concernés du texte fourni pour la v0.1 ;
+ne pas appliquer à leur place sa clause de nul géométrique.
 
 ## Décisions de l'utilisateur
 
