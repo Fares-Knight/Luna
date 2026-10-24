@@ -41,6 +41,43 @@ transmission des références internes. Le bilan final local conserve les SHA
 et preuves distantes ; les résultats de [CI](https://github.com/Fares-Knight/Luna/actions/workflows/ci.yml)
 sont consultables par commit.
 
+## Publication vérifiée
+
+Le dépôt [Fares-Knight/Luna](https://github.com/Fares-Knight/Luna) a été créé
+avec visibilité **publique**. Le commit source
+[`0b35fe7cfcfdbda08fcdf2f867c45b374fbdf153`](https://github.com/Fares-Knight/Luna/commit/0b35fe7cfcfdbda08fcdf2f867c45b374fbdf153)
+a été publié sur `main`. Après `fetch`, `main` et `origin/main` correspondaient,
+avec avance/retard **0/0**. Aucune autre référence ni aucun tag n'a été poussé.
+Les compléments documentaires ultérieurs sont consultables sur
+[la branche principale](https://github.com/Fares-Knight/Luna/tree/main) ; le bilan
+local conserve les SHA finaux sans imposer une auto-référence dans ce document.
+
+La [CI 40138567382](https://github.com/Fares-Knight/Luna/actions/runs/40138567382)
+est réussie : **156 tests Windows en 10,94 s**, **156 tests Ubuntu en 8,35 s**,
+lint ciblé, construction du wheel et installation/chargement isolés réussis.
+Un nouveau clone depuis GitHub, sans les fichiers ignorés du poste de travail,
+a permis l'installation `.[dev]` puis **156 tests réussis en 8,85 s**. La première
+tentative avait rencontré 20 erreurs de préparation liées aux droits d'un
+dossier temporaire pytest partagé, avec 136 tests réussis et aucune assertion
+échouée. Un `--basetemp` neuf a résolu ce problème sans modifier les tests.
+Le démarrage de `python -m luna` et sa fermeture ont aussi été contrôlés via
+`runpy`, avec un événement QUIT et le pilote SDL dummy.
+
+Le HTML réel du README rendu par GitHub comporte un titre principal, un tableau
+et les deux images attendues. Ses 17 liens contrôlés répondent HTTP 200 ; les
+deux PNG distants répondent HTTP 200 et leurs empreintes correspondent aux
+captures locales inspectées. Les 36 liens externes de documentation contrôlés
+répondent également HTTP 200 et les liens locaux publiables sont résolus.
+Ces contrôles de structure, liens et fichiers ne sont pas une inspection
+visuelle du rendu GitHub dans un navigateur ; cette dernière n'a pas été
+exécutée après la limitation de l'outil disponible.
+
+Le scan Gitleaks du snapshot final de **135 fichiers** et celui de l'historique
+complet de `main` publié à cette étape (**un commit**) n'ont produit aucune
+détection. L'interrogation OSV de cinq dépendances directes n'a renvoyé aucune
+entrée de vulnérabilité. Les dépendances transitives Android, les bibliothèques
+natives et le runtime CDN ne bénéficient pas d'une couverture exhaustive.
+
 ## Constats et corrections
 
 | Gravité | Preuve / impact | Correction et vérification |
@@ -61,8 +98,9 @@ et les emplacements ignorés pertinents. L'inventaire initial scanné représent
 environ 170,86 Mo. Les 206 détections obtenues ont été attribuées aux dépendances,
 exemples et outils locaux ignorés, notamment des licences et fichiers minifiés ;
 aucun secret confirmé dans les sources du projet n'a été identifié à cette étape.
-Le contrôle du contenu final et de l'historique effectivement transmis doit être
-refait avant chaque publication ; `.gitignore` n'efface pas un secret historique.
+Le contrôle du contenu final et de l'historique effectivement transmis est
+décrit dans la section de publication ci-dessus et doit être refait avant
+chaque publication ; `.gitignore` n'efface pas un secret historique.
 L'historique initial ne contenait aucun commit publiable.
 
 Les archives produites ont aussi été **extraites explicitement** avant analyse :

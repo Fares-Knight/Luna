@@ -18,6 +18,8 @@ v0.1 jouable ; aucun APK ou installateur n'est annoncé comme livré sur GitHub.
 | APK local | Signature debug v2 vérifiée ; 9 OBJ identiques aux sources et 2 notices OFL présents | APK non distribué ; pas d'émulateur ni de téléphone rejoué pendant cet audit |
 | Capture PC | Rendu actuel 1200 × 800, 48 fleurs, textures et panneaux inspectés | SDL dummy ; aucune mesure de fluidité ou écoute humaine |
 | Démo existante | URL Vercel : HTTP 200 | Contrôle interactif actuel non exécuté : outil de navigateur indisponible pour ce parcours |
+| CI GitHub | [Exécution 40138567382](https://github.com/Fares-Knight/Luna/actions/runs/40138567382) : **réussie sur Windows et Ubuntu**, 156 tests par système, lint, build wheel et installation isolée | Exécution sur le commit source `0b35fe7cfcfdbda08fcdf2f867c45b374fbdf153` |
+| Clone neuf depuis GitHub | Installation `.[dev]` et **156 tests réussis en 8,85 s**, sans fichiers locaux ignorés | Première tentative : 136 réussis, 20 erreurs de préparation dues aux droits du dossier temporaire pytest partagé ; relance réussie avec `--basetemp` neuf, sans modification des tests |
 
 Le build setuptools émet des avertissements sur les dossiers de ressources
 non déclarés comme paquets Python. Le contenu réel du wheel et son chargement

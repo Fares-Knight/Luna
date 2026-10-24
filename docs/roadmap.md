@@ -12,9 +12,8 @@ Cette liste n'annonce ni calendrier ni fonctionnalité déjà disponible.
 | B1 · P2 — cohérence des phases restaurées | `android/app/src/main/python/luna_bridge.py`, fonction `decode` ; un snapshot initial dont la seule phase devient `distribution` est accepté avec 48 fleurs et zéro ciseau | Une sauvegarde modifiée/incohérente peut produire un état impossible ; aucun parcours normal ne génère ce cas observé | Définir les invariants de chaque phase à partir du domaine ; refuser cette restauration sans changer état/RNG et ajouter tests de sauvegardes incohérentes |
 | B2 · P3 — racine JSON non objet | Même fichier, `Session.call` / `dispatch` ; appels `null` et `[]` reproduisant `AttributeError` | Le contrat interne ne renvoie pas une erreur JSON structurée pour ces entrées ; le client Java envoie normalement des objets | Vérifier le type à l'entrée ; réponse d'erreur stable, aucun changement d'état et tests sur null, liste et scalaire |
 
-Ces points ne constituent pas une API réseau exposée : le bridge est interne
-au processus Android. Ils sont conservés au backlog pour éviter d'étendre
-l'audit de publication à une refonte du moteur.
+Ces points concernent des entrées malformées hors des parcours normaux observés.
+Le bridge est un contrat interne au processus Android, sans API réseau exposée.
 
 ## Validation et dette technique
 
@@ -50,6 +49,11 @@ des comportements réellement livrés.
   passant de 48 fleurs sur le plateau au résultat, avec erreurs console contrôlées.
 - **Suggestion P3** : choisir un canal de signalement des vulnérabilités avant
   d'ajouter un document de sécurité. Aucun service privé de signalement n'est promis.
+- **Suggestion P3** : réduire les permissions et helpers inutilisés du template
+  (`web/template.html`) : autorisations d'iframe caméra, microphone et géolocalisation,
+  ainsi que helpers utilisant `innerHTML`. Aucun besoin fonctionnel ni exploitation
+  de ces éléments n'a été établi. Acceptation : supprimer les permissions
+  superflues et helpers inutilisés, puis vérifier les parcours web sans régression.
 - Le mainteneur décide des appareils officiellement supportés, de la priorité
   des pistes ci-dessus et d'une éventuelle distribution binaire. La licence MIT
   et la publication des sources ont été choisies pour cette livraison.
